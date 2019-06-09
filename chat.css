@@ -8,6 +8,10 @@
     z-index: 9;
 }
 
+body {
+    background: url("img/bg.png");
+}
+
 .chat-header {
     position: relative;
     width: 100%;
@@ -121,6 +125,7 @@
     right: 8.89%;
     top: 17.05%;
     bottom: 46.59%;
+    cursor: pointer;
 }
 
 .chat-input img {

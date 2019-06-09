@@ -10,7 +10,7 @@
     <script src="chat.js"></script>
 </head>
 
-<body style="background: lightgray">
+<body>
     <div class="chat-popup" id="chat">
         <div class="chat-header">
             <div class="chat-header-background"></div>
@@ -26,7 +26,7 @@
         <div class="chat-input">
             <div class="chat-input-line"></div>
             <div class="chat-input-background"></div>
-            <div class="chat-input-text" id="text" tabindex="0" contenteditable="true" onblur="blurInput()"></div>
+            <div class="chat-input-text" id="text" tabindex="0" contenteditable="true" onblur="blurInput()" oninput="testPlace()"></div>
             <div class="chat-input-placeholder" id="placeholder" onclick="focusInput()">Введите Ваше сообщение...</div>
             <img src="img/send.png" onclick="sendMessage()">
         </div>

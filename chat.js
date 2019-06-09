@@ -98,4 +98,11 @@ function addOption(text) {
     box.appendChild(optBuble);
 }
 
+function testPlace() {
+    var text = document.getElementById('text').innerText.trim();
+    if (text.length > 0) {
+        document.getElementById('placeholder').style.display = 'none';
+    }
+}
+
 connect();
