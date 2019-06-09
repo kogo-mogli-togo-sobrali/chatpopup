@@ -29,7 +29,7 @@
     width: 62px;
     height: 62px;
     left: 32px;
-    top: 25px;
+    top: 10px;
 
     background: #FFFFFF;
     border-radius: 50%;
@@ -171,6 +171,7 @@ align-items: center;
 text-align: center;
 
 color: #F1713F;
+cursor: pointer;
 }
 
 
