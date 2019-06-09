@@ -26,7 +26,8 @@
         <div class="chat-input">
             <div class="chat-input-line"></div>
             <div class="chat-input-background"></div>
-            <div class="chat-input-placeholder">Введите Ваше сообщение...</div>
+            <div class="chat-input-text" id="text" tabindex="0" contenteditable="true" onblur="blurInput()"></div>
+            <div class="chat-input-placeholder" id="placeholder" onclick="focusInput()">Введите Ваше сообщение...</div>
         </div>
     </div>
 </body>

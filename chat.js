@@ -47,3 +47,14 @@ function connect() {
         console.log(msg);
     }
 }
+
+function focusInput() {
+    document.getElementById('text').focus();
+    document.getElementById('placeholder').style.display = 'none';
+}
+
+function blurInput() {
+    if (document.getElementById('text').innerText.trim().length === 0) {
+        document.getElementById('placeholder').style.display = 'block';
+    }
+}
