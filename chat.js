@@ -13,28 +13,25 @@ function closeChat() {
 
 function sendMessage() {
     if (chatSocket === null || chatSocket.readyState != WebSocket.OPEN) {
+        console.warn('socket closed');
         return;
     }
 
-    var textArea = document.getElementById('chat-input-text');
-    var text = textArea.value;
-    var msg = {
-        message: text,
-        date: new Date().toISOString()
-    };
-    chatSocket.send(JSON.stringify(msg));
-    textArea.value = '';
+    var text = document.getElementById('text').innerText.trim();
+    document.getElementById('text').innerText = '';
+    document.getElementById('placeholder').style.display = 'block';
+    if (text.length > 0) {
+        var msg = {
+            message: text,
+            date: new Date().toISOString()
+        };
+        chatSocket.send(JSON.stringify(msg));
+        addUserMessage(text);
+    }
 }
 
 function connect() {
-    var serverUrl;
-    var scheme = 'ws';
-
-    if (document.location.protocol === 'https://') {
-        scheme += 's';
-    }
-
-    serverUrl = scheme + '://' + document.location.hostname + ':6502';
+    var serverUrl = 'ws://localhost:27015/send';
 
     chatSocket = new WebSocket(serverUrl, 'json');
 
@@ -45,6 +42,12 @@ function connect() {
     chatSocket.onmessage = function (evt) {
         var msg = JSON.parse(evt.data);
         console.log(msg);
+        addBotMessage(msg.message);
+        if (msg.options != null) {
+            for (var i = 0; i < msg.options.length; ++i) {
+                addOption(msg.options[i]);
+            }
+        }
     }
 }
 
@@ -58,3 +61,41 @@ function blurInput() {
         document.getElementById('placeholder').style.display = 'block';
     }
 }
+
+function addUserMessage(text) {
+    var msgBuble = document.createElement('div');
+    msgBuble.className = 'user-message';
+    msgBuble.innerText = text;
+
+    var container = document.getElementById('messagebox');
+    container.appendChild(msgBuble);
+}
+
+function addBotMessage(text) {
+    var msgBuble = document.createElement('div');
+    msgBuble.className = 'bot-message';
+    msgBuble.innerText = text;
+
+    var container = document.getElementById('messagebox');
+    container.appendChild(msgBuble);
+}
+
+function addOption(text) {
+    var optBuble = document.createElement('div');
+    optBuble.className = 'opt-message';
+    optBuble.innerText = text;
+    optBuble.onclick = function () {
+        document.getElementById('text').innerText = text;
+        var mb = document.getElementById('messagebox');
+        var opts = document.getElementsByClassName('opt-message');
+        while (opts.length > 0) {
+            mb.removeChild(opts[0]);
+        }
+        sendMessage();
+    };
+
+    var box = document.getElementById('messagebox');
+    box.appendChild(optBuble);
+}
+
+connect();

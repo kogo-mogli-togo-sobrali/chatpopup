@@ -19,7 +19,7 @@
                 <img src="img/robot.png">
             </div>
         </div>
-        <div class="chat-messagebox">
+        <div class="chat-messagebox" id='messagebox'>
         </div>
         <div class="chat-predictbox">
         </div>
@@ -28,8 +28,10 @@
             <div class="chat-input-background"></div>
             <div class="chat-input-text" id="text" tabindex="0" contenteditable="true" onblur="blurInput()"></div>
             <div class="chat-input-placeholder" id="placeholder" onclick="focusInput()">Введите Ваше сообщение...</div>
+            <img src="img/send.png" onclick="sendMessage()">
         </div>
     </div>
+    <script>addBotMessage('Добрый день! Я - виртуальный ассистент ЖКХ. Я помогу Вам оформить заявку на вызов специалиста в Ваш дом.');</script>
 </body>
 
 </html>
