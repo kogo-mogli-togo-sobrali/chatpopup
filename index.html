@@ -26,12 +26,21 @@
         <div class="chat-input">
             <div class="chat-input-line"></div>
             <div class="chat-input-background"></div>
-            <div class="chat-input-text" id="text" tabindex="0" contenteditable="true" onblur="blurInput()" oninput="testPlace()"></div>
+            <div class="chat-input-text" id="text" tabindex="0" contenteditable="true" onblur="blurInput()"
+                oninput="testPlace()"></div>
             <div class="chat-input-placeholder" id="placeholder" onclick="focusInput()">Введите Ваше сообщение...</div>
             <img src="img/send.png" onclick="sendMessage()">
         </div>
     </div>
-    <script>addBotMessage('Добрый день! Я - виртуальный ассистент ЖКХ. Я помогу Вам оформить заявку на вызов специалиста в Ваш дом.');</script>
+    <script>
+        addBotMessage('Добрый день! Я - виртуальный ассистент ЖКХ. Я помогу Вам оформить заявку на вызов специалиста в Ваш дом.');
+        document.getElementById('text').onkeyup = function (e) {
+            if (e.keyCode === 13) {
+                sendMessage();
+                document.getElementById('text').innerText = '';
+            }
+        }
+    </script>
 </body>
 
 </html>
